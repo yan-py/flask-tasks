@@ -1,0 +1,19 @@
+{% include 'base.html' %}
+
+{% block body %}
+{% include 'header.html' %}
+<form class="justify-content-center px-4 my-4" action="/add" method="post">
+  {{ form.hidden_tag() }}
+  <div class="input-group mb-3">
+    {{ form.title(class="form-control") }}
+  </div>
+
+  <div class="input-group mb-2">
+    {{ form.body(class="form-control") }}
+  </div>
+
+  <div class="">
+    {{ form.submit(class="btn btn-md btn-outline-primary") }}
+  </div>
+</form>
+{% endblock %}

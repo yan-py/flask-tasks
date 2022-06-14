@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    {% include 'header.html' %}
+    <div class="accordion px-4 my-4" id="accordionExample">
+        {% for task in tasks %}
+            {% include 'task.html' %}
+        {% endfor %}
+    </div>
+{% endblock %}

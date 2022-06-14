@@ -1,0 +1,17 @@
+<header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        {% if page == 'add' %}
+          <li class="nav-item"><a href="/dashboard" class="nav-link" aria-current="page">Tasks</a></li>
+          <li class="nav-item"><a href="/add" class="nav-link active">Add</a></li>
+          <li class="nav-item"><a href="/trash" class="nav-link">Trash</a></li>
+        {% elif page == 'dashboard' %}
+          <li class="nav-item"><a href="/dashboard" class="nav-link active" aria-current="page">Tasks</a></li>
+          <li class="nav-item"><a href="/add" class="nav-link">Add</a></li>
+          <li class="nav-item"><a href="/trash" class="nav-link">Trash</a></li>
+        {% elif page == 'trash' %}
+          <li class="nav-item"><a href="/dashboard" class="nav-link" aria-current="page">Tasks</a></li>
+          <li class="nav-item"><a href="/add" class="nav-link">Add</a></li>
+          <li class="nav-item"><a href="/trash" class="nav-link active">Trash</a></li>
+        {% endif %}
+      </ul>
+</header>
