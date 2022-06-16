@@ -4,6 +4,8 @@ from forms import TaskForm, CloseForm, LoginForm
 from flask_login import login_required, login_user, current_user
 import database as db
 from login import UserLogin
+from threading import Thread
+from telegram_bot.handler import bot
 
 
 @app.errorhandler(401)
@@ -66,4 +68,5 @@ def trash():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    Thread(target=bot.polling).start()
+    app.run()

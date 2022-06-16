@@ -5,6 +5,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     login = db.Column(db.String(256), unique=True, nullable=False)
     password = db.Column(db.String(256), nullable=False)
+    tgid = db.Column(db.Integer)
 
 
 class Task(db.Model):
@@ -37,8 +38,8 @@ def add_task(userid, title, body):
     db.session.commit()
 
 
-def add_user(login, password):
-    user = User(login=login, password=password)
+def add_user(login, password, tgid=0):
+    user = User(login=login, password=password, tgid=tgid)
     db.session.add(user)
     db.session.commit()
 
@@ -53,4 +54,4 @@ def get_user_by_login(login):
 
 if __name__ == '__main__':
     db.create_all()
-    add_user('user', 'user')
+    add_user('user', 'user', 0)

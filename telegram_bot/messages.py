@@ -1,0 +1,5 @@
+menu = "ID: {}"
+new_user = "Please, link your telegram account in web version.\n{}"
+task = "Task ID: {}\n\nTitule: {}\n+----------------------------------+\n{}\n+----------------------------------+"
+task_close = "\n----------\nTask successfully closed."
+task_not_found = "\n----------\nTask not found."
