@@ -17,3 +17,11 @@ class LoginForm(FlaskForm):
     login = StringField("Login")
     password = PasswordField("Password")
     submit = SubmitField("Login")
+    signup = SubmitField("Sign up")
+
+
+class SignupForm(FlaskForm):
+    username = StringField("Username")
+    password = PasswordField("Password")
+    tgid = StringField("Telegram ID")
+    submit = SubmitField("Sign up")

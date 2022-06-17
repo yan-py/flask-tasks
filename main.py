@@ -1,11 +1,23 @@
 from flask import render_template, redirect, url_for
+from werkzeug.security import check_password_hash
+
 from config import app, login_manager
-from forms import TaskForm, CloseForm, LoginForm
+from forms import TaskForm, CloseForm, LoginForm, SignupForm
 from flask_login import login_required, login_user, current_user
 import database as db
 from login import UserLogin
 from threading import Thread
 from telegram_bot.handler import bot
+
+
+@app.errorhandler(500)
+def server_error(a):
+    return redirect(url_for('login'))
+
+
+@app.errorhandler(404)
+def file_not_found(a):
+    return redirect(url_for('login'))
 
 
 @app.errorhandler(401)
@@ -24,11 +36,22 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = db.get_user_by_login(form.login.data)
-        if user and user.password == form.password.data:
+        if user and check_password_hash(user.password, form.password.data):
             user_login = UserLogin().create(user)
             login_user(user_login, remember=False)
             return redirect(url_for('dashboard'))
     return render_template('login.html', form=form)
+
+
+@app.route("/signup", methods=['POST', 'GET'])
+def signup():
+    form = SignupForm()
+    if form.validate_on_submit():
+        user = db.add_user(form.username.data, form.password.data, form.tgid.data)
+        user_login = UserLogin().create(user)
+        login_user(user_login, remember=True)
+        return redirect(url_for('dashboard'))
+    return render_template('signup.html', form=form)
 
 
 @app.route("/dashboard")

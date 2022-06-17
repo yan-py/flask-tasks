@@ -6,10 +6,13 @@
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card border-0 shadow rounded-3 my-5">
               <div class="card-body p-4 p-sm-5">
-                <form action="/login" method="post">
+                <form action="/signup" method="post">
                   {{ form.hidden_tag() }}
                   <div class="form-floating mb-3">
-                    {{ form.login(class="form-control") }} {{ form.login.label() }}
+                    {{ form.username(class="form-control") }} {{ form.username.label() }}
+                  </div>
+                  <div class="form-floating mb-3">
+                    {{ form.tgid(class="form-control") }} {{ form.tgid.label() }}
                   </div>
                   <div class="form-floating mb-3">
                     {{ form.password(class="form-control") }} {{ form.password.label() }}
@@ -17,12 +20,6 @@
 
                   <div class="d-grid">
                     {{ form.submit(class="btn btn-primary btn-login text-uppercase fw-bold") }}
-                  </div>
-                </form>
-                <form action="/signup", method="get">
-                  {{ form.hidden_tag() }}
-                  <div class="d-grid">
-                    {{ form.signup(class="btn btn-login text-uppercase fw-bold") }}
                   </div>
                 </form>
               </div>

@@ -1,4 +1,5 @@
 from config import db
+from werkzeug.security import generate_password_hash
 
 
 class User(db.Model):
@@ -39,9 +40,10 @@ def add_task(userid, title, body):
 
 
 def add_user(login, password, tgid=0):
-    user = User(login=login, password=password, tgid=tgid)
+    user = User(login=login, password=generate_password_hash(password), tgid=tgid)
     db.session.add(user)
     db.session.commit()
+    return user
 
 
 def get_user(userid):
