@@ -1,4 +1,7 @@
 import re
+
+from sqlalchemy import or_
+
 from config import db, bot
 from database import Task
 from telegram_bot import messages as msg
@@ -35,6 +38,29 @@ def update(callback, user):
             return bot.send_message(callback.message.chat.id, msg.task.format(task.id, task.title, task.body),
                                     reply_markup=keys.task(task.id))
 
+    if re.fullmatch('add_task', callback.data):
+        db.session.add(Task(userid=user.id, title='wait', status=False))
+        db.session.commit()
+        return bot.send_message(callback.message.chat.id, msg.task_titule)
+
     if callback.data == 'tasks':
         return bot.send_message(callback.message.chat.id, msg.menu.format(callback.message.chat.id),
                                 reply_markup=keys.tasks())
+
+
+@bot.message_handler()
+@user_exist
+def text(message, user):
+    task = db.session.query(Task).filter(Task.userid == user.id, or_(Task.title == 'wait', Task.body == 'wait')).first()
+    if task:
+        if task.title == 'wait':
+            task.title = message.text
+            task.body = 'wait'
+            db.session.commit()
+            return bot.send_message(message.chat.id, msg.task_body)
+        if task.body == 'wait':
+            task.body = message.text
+            task.status = True
+            db.session.commit()
+            return bot.send_message(user.tgid, msg.menu.format(user.tgid), reply_markup=keys.tasks())
+

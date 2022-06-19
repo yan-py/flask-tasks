@@ -8,7 +8,6 @@ To start use
 
 TODO:
 - Link web with telegram account
-- Add task in telegram
 - Subtasks
 - Deadlines
 - Notifications in telegram

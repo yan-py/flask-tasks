@@ -7,7 +7,8 @@ def tasks():
     markup = types.InlineKeyboardMarkup()
     for index, task in enumerate(db.session.query(Task).filter_by(status=True).all()):
         markup.row(types.InlineKeyboardButton(task.title[:25], callback_data=f'task_{task.id}'))
-    markup.row(types.InlineKeyboardButton('Update', callback_data='tasks'))
+    markup.row(types.InlineKeyboardButton('Update', callback_data='tasks'),
+               types.InlineKeyboardButton('Add', callback_data='add_task'))
     return markup
 
 

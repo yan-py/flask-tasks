@@ -4,3 +4,5 @@ task = "Task ID: {}\n\nTitule: {}\n+----------------------------------+\n{}\n+--
 task_close = "\n----------\nTask successfully closed."
 task_not_found = "\n----------\nTask not found."
 error = "Something happen wrong"
+task_titule = "Enter task titule:"
+task_body = "Enter task body:"
